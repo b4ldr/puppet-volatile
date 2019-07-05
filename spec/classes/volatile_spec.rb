@@ -9,7 +9,7 @@ describe 'volatile' do
       # size: "64M",
       # owner: "root",
       # group: "root",
-      # mode: "0611",
+      # mode: "0711",
     }
   end
 
@@ -25,10 +25,10 @@ describe 'volatile' do
         it { is_expected.to compile.with_all_deps }
         it do
           is_expected.to contain_file('/var/cache/volatile').with(
-            ensure: 'present',
+            ensure: 'directory',
             owner: 'root',
             group: 'root',
-            mode: '0611',
+            mode: '0711',
           )
         end
         it do
@@ -36,7 +36,7 @@ describe 'volatile' do
             ensure: 'mounted',
             device: 'tmpfs',
             fstype: 'tmpfs',
-            options: 'size=64M,mode=0611,uid=root,gid=root',
+            options: 'size=64M,mode=0711,uid=root,gid=root',
             atboot: true,
           )
         end
@@ -53,10 +53,10 @@ describe 'volatile' do
           it { is_expected.to compile }
           it do
             is_expected.to contain_file('/foo/bar').with(
-              ensure: 'present',
+              ensure: 'directory',
               owner: 'root',
               group: 'root',
-              mode: '0611',
+              mode: '0711',
             )
           end
           it do
@@ -64,7 +64,7 @@ describe 'volatile' do
               ensure: 'mounted',
               device: 'tmpfs',
               fstype: 'tmpfs',
-              options: 'size=64M,mode=0611,uid=root,gid=root',
+              options: 'size=64M,mode=0711,uid=root,gid=root',
               atboot: true,
             )
           end
@@ -77,7 +77,7 @@ describe 'volatile' do
               ensure: 'mounted',
               device: 'tmpfs',
               fstype: 'tmpfs',
-              options: 'size=42M,mode=0611,uid=root,gid=root',
+              options: 'size=42M,mode=0711,uid=root,gid=root',
               atboot: true,
             )
           end
@@ -87,10 +87,10 @@ describe 'volatile' do
           it { is_expected.to compile }
           it do
             is_expected.to contain_file('/var/cache/volatile').with(
-              ensure: 'present',
+              ensure: 'directory',
               owner: 'foobar',
               group: 'root',
-              mode: '0611',
+              mode: '0711',
             )
           end
           it do
@@ -98,7 +98,7 @@ describe 'volatile' do
               ensure: 'mounted',
               device: 'tmpfs',
               fstype: 'tmpfs',
-              options: 'size=64M,mode=0611,uid=foobar,gid=root',
+              options: 'size=64M,mode=0711,uid=foobar,gid=root',
               atboot: true,
             )
           end
@@ -109,10 +109,10 @@ describe 'volatile' do
           # Add Check to validate change was successful
           it do
             is_expected.to contain_file('/var/cache/volatile').with(
-              ensure: 'present',
+              ensure: 'directory',
               owner: 'root',
               group: 'foobar',
-              mode: '0611',
+              mode: '0711',
             )
           end
           it do
@@ -120,7 +120,7 @@ describe 'volatile' do
               ensure: 'mounted',
               device: 'tmpfs',
               fstype: 'tmpfs',
-              options: 'size=64M,mode=0611,uid=root,gid=foobar',
+              options: 'size=64M,mode=0711,uid=root,gid=foobar',
               atboot: true,
             )
           end
@@ -131,7 +131,7 @@ describe 'volatile' do
           # Add Check to validate change was successful
           it do
             is_expected.to contain_file('/var/cache/volatile').with(
-              ensure: 'present',
+              ensure: 'directory',
               owner: 'root',
               group: 'root',
               mode: '1777',

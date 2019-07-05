@@ -25,10 +25,9 @@ define volatile::file (
 
     # create an array of all sub directories which need creating
     $dirs = $title[1,-1].dirname.split('/').reduce([]) |$memo, $subdir| {
-        if $memo.empty {
-            $_dir = "${volatile::mountpoint}/${subdir}"
-        } else {
-            $_dir = "${$memo[-1]}/${subdir}"
+        $_dir = $memo.empty ? {
+            true    => "${volatile::mountpoint}/${subdir}",
+            default => "${$memo[-1]}/${subdir}",
         }
         concat($memo, $_dir)
     }
